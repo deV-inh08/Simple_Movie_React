@@ -34,21 +34,23 @@ function App() {
             </div>
         </div>
       </section>
+      
+      {/* Now playing */}
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Now Playing</h2>
         <MovieList></MovieList>
       </section>
+
+      {/* Trending */}
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Trending</h2>
-        <div className="movie-list grid grid-cols-4 gap-10">
-          <MovieCard></MovieCard>
-        </div>
+        <MovieList type="popular"></MovieList>
       </section>
+
+      {/* Top Rated */}
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Rated</h2>
-        <div className="movie-list grid grid-cols-4 gap-10">
-          <MovieCard></MovieCard>
-        </div>
+        <MovieList type="top_rated"></MovieList>
       </section>
     </Fragment>
   )
