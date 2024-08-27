@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom"
+import MovieCard from "./components/movie/MovieCard";
+import MovieList from "./components/movie/MovieList";
 
 function App() {
   return (
@@ -28,65 +30,24 @@ function App() {
                   Advenger
                 </span>
               </div>
-              <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium">Watch Now</button>
+              <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium mb-3">Watch Now</button>
             </div>
         </div>
       </section>
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Now Playing</h2>
-        <div className="movie-list grid grid-cols-4 gap-10">
-          <div className="movie-card rounded-lg p-3 bg-slate-800">
-            <img
-              src="https://cdn.marvel.com/content/1x/avengersendgame_lob_mas_mob_01.jpg"
-              alt=""
-              className="w-full h-[250px] object-cover rounded-lg mb-5"/>
-              <h3 className="text-white text-xl font-bold mb-3">Spiderman: Home comming</h3>
-              <div className="flex items-center justify-between text-sm opacity-50 text-white mb-5">
-                <span>2017</span>
-                <span>7.4</span>
-              </div>
-              <button className="py-3 px-6 rounded-lg capitalize text-white bg-primary w-full">
-                Watch now
-              </button>
-          </div>
-        </div>
+        <MovieList></MovieList>
       </section>
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Trending</h2>
         <div className="movie-list grid grid-cols-4 gap-10">
-          <div className="movie-card rounded-lg p-3 bg-slate-800">
-            <img
-              src="https://cdn.marvel.com/content/1x/avengersendgame_lob_mas_mob_01.jpg"
-              alt=""
-              className="w-full h-[250px] object-cover rounded-lg mb-5"/>
-              <h3 className="text-white text-xl font-bold mb-3">Spiderman: Home comming</h3>
-              <div className="flex items-center justify-between text-sm opacity-50 text-white mb-5">
-                <span>2017</span>
-                <span>7.4</span>
-              </div>
-              <button className="py-3 px-6 rounded-lg capitalize text-white bg-primary w-full">
-                Watch now
-              </button>
-          </div>
+          <MovieCard></MovieCard>
         </div>
       </section>
       <section className="movies-layout page-container pb-20">
         <h2 className="capitalize text-white mb-5 text-2xl font-bold">Rated</h2>
         <div className="movie-list grid grid-cols-4 gap-10">
-          <div className="movie-card rounded-lg p-3 bg-slate-800">
-            <img
-              src="https://cdn.marvel.com/content/1x/avengersendgame_lob_mas_mob_01.jpg"
-              alt=""
-              className="w-full h-[250px] object-cover rounded-lg mb-5"/>
-              <h3 className="text-white text-xl font-bold mb-3">Spiderman: Home comming</h3>
-              <div className="flex items-center justify-between text-sm opacity-50 text-white mb-5">
-                <span>2017</span>
-                <span>7.4</span>
-              </div>
-              <button className="py-3 px-6 rounded-lg capitalize text-white bg-primary w-full">
-                Watch now
-              </button>
-          </div>
+          <MovieCard></MovieCard>
         </div>
       </section>
     </Fragment>
