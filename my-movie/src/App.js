@@ -2,6 +2,9 @@ import React, { Fragment } from "react";
 import { NavLink } from "react-router-dom"
 import MovieCard from "./components/movie/MovieCard";
 import MovieList from "./components/movie/MovieList";
+import "swiper/scss";
+import Banner from "./components/banner/Banner";
+
 
 function App() {
   return (
@@ -10,7 +13,9 @@ function App() {
         <span className="text-primary">Home</span>
         <span>Movies</span>
       </header>
-      <section className="banner h-[500px] page-container mb-10">
+
+      {/* Banner */}
+      {/* <section className="banner h-[500px] page-container mb-10">
         <div className="w-full h-full rounded-lg bg-white relative">
           <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
           <img 
@@ -33,7 +38,8 @@ function App() {
               <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium mb-3">Watch Now</button>
             </div>
         </div>
-      </section>
+      </section> */}
+      <Banner></Banner>
       
       {/* Now playing */}
       <section className="movies-layout page-container pb-20">
