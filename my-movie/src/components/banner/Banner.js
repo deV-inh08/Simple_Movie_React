@@ -25,7 +25,6 @@ const Banner = () => {
 
 function BannerItem({ item }) {
     const {title, poster_path, release_date, vote_average, overview} = item;
-    console.log(item)
     return(
         <div className="w-full h-full rounded-lg bg-white relative">
             <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
