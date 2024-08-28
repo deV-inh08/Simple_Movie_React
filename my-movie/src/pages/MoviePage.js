@@ -1,9 +1,35 @@
 import React from "react";
+import useSWR from "swr";
+import { fetcher } from "../config/config";
+import MovieCard from "../components/movie/MovieCard";
 
 const MoviePage = () => {
+    const { data } = useSWR("https://api.themoviedb.org/3/movie/popular?api_key=939b4d71a1347aced70fc77fe9800e68", fetcher);
+    const movies = data?.results || [];
     return(
-        <div>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+        <div className="py-10 page-container">
+            <div className="flex mb-10">
+                <div className="flex-1">
+                    <input 
+                        type="text"
+                        className="w-full p-4 bg-slate-800 outline-none text-white"
+                        placeholder="Type here to search"
+                    />
+                </div>
+                <button className="p-4 bg-primary text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+
+                </button>
+            </div>
+            <div className="grid grid-cols-4 gap-10">
+                {movies.length > 0 && movies.map((item) => {
+                    return(
+                        <MovieCard key={item.id} item={item}></MovieCard>
+                    )
+                })}
+            </div>
         </div>
     )
 };
