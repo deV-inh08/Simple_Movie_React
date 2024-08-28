@@ -27,7 +27,7 @@ const MovieList = ({ type = "now_playing" }) => {
                     )
                 })}
             </Swiper>
-      </div>
+        </div>
     )
 };
 export default MovieList;
