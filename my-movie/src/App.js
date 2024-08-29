@@ -1,16 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, lazy, Suspense} from "react";
 import "swiper/scss";
 import { Route, Routes } from "react-router-dom"
 import Main from "./components/layout/Main";
-import HomePage from "./pages/HomePage";
 import Banner from "./components/banner/Banner";
-import MoviePage from "./pages/MoviePage";
-import MovieDetailsPage from "./pages/MovieDetailsPage";
-
+const HomePage = lazy(() => import("./pages/HomePage"));
+const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"))
+const MoviePage = lazy(() => import("./pages/MoviePage"))
 
 function App() {
   return (
     <Fragment>
+      <Suspense fallback>
         <Routes>
             <Route element={<Main></Main>}>
 
@@ -24,7 +24,8 @@ function App() {
               <Route path="/movie" element={<MoviePage></MoviePage>}></Route>
               <Route path="/movie/:movieId" element={<MovieDetailsPage></MovieDetailsPage>}></Route>
             </Route>
-        </Routes>      
+        </Routes>    
+      </Suspense>  
     </Fragment>
   )
 }
