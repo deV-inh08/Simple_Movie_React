@@ -1,14 +1,14 @@
 import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import { fetcher, API_KEY} from "../config/config";
+import { fetcher, tmdbAPI} from "../config/config";
 
 import {SwiperSlide, Swiper} from "swiper/react";
 import MovieCard from "../components/movie/MovieCard";
 
 const MovieDetailsPage = () => {
     const { movieId } = useParams();
-    const { data, err} = useSWR(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`, fetcher);
+    const { data, err} = useSWR(tmdbAPI.getMovieDetail(movieId), fetcher);
     return(
         <Fragment>
             {data && 
@@ -16,12 +16,12 @@ const MovieDetailsPage = () => {
                      <div className="w-full h-[600px] relative mb-10">
                         <div className="absolute inset-0 bg-opacity-75 bg-black"></div>
                         <div className="w-full h-full bg-cover" style={{
-                                backgroundImage: `url( "https://image.tmdb.org/t/p/original${data.backdrop_path}")`}}>
+                                backgroundImage: `url(${tmdbAPI.imageOriginal(data.backdrop_path)})`}}>
                         </div>
                     </div>
                     <div className="w-full h-[400px] max-w-[800px] mx-auto -mt-[200px] relative z-10 pb-10">
                         <img 
-                            src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
+                            src={`${tmdbAPI.imageOriginal(data.poster_path)}`}
                             alt=""
                             className="w-full h-full object-cover rounded-xl"
                         />
@@ -50,7 +50,7 @@ const MovieDetailsPage = () => {
 // Movie Credits
 function MovieCredits() {
     const { movieId } = useParams();
-    const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`, fetcher);
+    const { data, err } = useSWR(tmdbAPI.getMovieMeta(movieId, "credits"), fetcher);
     if(!data) return null;
     const { cast } = data;
     return(
@@ -77,7 +77,7 @@ function MovieCredits() {
 // Movie Video
 function MovieVideo() {
     const { movieId } = useParams();
-    const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`, fetcher);
+    const { data, err } = useSWR(tmdbAPI.getMovieMeta(movieId, "videos"), fetcher);
     if(!data) return null;
     const {id , results} = data;
     if(!results || results.length < 0) return null;
@@ -106,7 +106,7 @@ function MovieVideo() {
 // Movie Similar
 function MovieSimilar() {
     const { movieId } = useParams();
-    const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}`, fetcher);
+    const { data, err } = useSWR(tmdbAPI.getMovieMeta(movieId, "similar"), fetcher);
     if(!data) return null;
     const { results } = data;
     if(!results || results.length < 0) return null;

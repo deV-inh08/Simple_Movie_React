@@ -1,14 +1,13 @@
 import React from "react";
 import useSWR from "swr";
-import {fetcher} from "../../config/config";
+import {fetcher, tmdbAPI} from "../../config/config";
 import {SwiperSlide, Swiper} from "swiper/react";
 import Button from "../button/Button";
 import { useNavigate } from "react-router";
 
 
 const Banner = () => {
-    const API_KEY = "939b4d71a1347aced70fc77fe9800e68";
-    const { data, error, isLoading } = useSWR(`https://api.themoviedb.org/3/movie/upcoming?api_key=${API_KEY}`, fetcher);
+    const { data, error, isLoading } = useSWR(tmdbAPI.getMovieUpComing("upcoming"), fetcher);
     const movies = data?.results || [];
     return (
         <section className="banner h-[550px] page-container mb-10">
@@ -32,7 +31,7 @@ function BannerItem({ item }) {
         <div className="w-full h-full rounded-lg bg-white relative">
             <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
             <img 
-                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                src={`${tmdbAPI.imageBanner500(poster_path)}`}
                 alt=""
                 className="w-full h-full object-cover rounded-lg object-top"
             />
@@ -42,7 +41,6 @@ function BannerItem({ item }) {
                         <p>{overview}</p>
                     </div>
                 <Button className="mb-4" onClick={() => navigate(`/movie/${id}`)}></Button>
-                {/* <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium mb-4">Watch Now</button> */}
             </div>
         </div>
     )

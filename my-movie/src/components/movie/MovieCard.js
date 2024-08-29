@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../button/Button";
+import { tmdbAPI } from "../../config/config"
 
 const MovieCard = ({ item } ) => {
     const navigate = useNavigate()
@@ -9,7 +10,7 @@ const MovieCard = ({ item } ) => {
                 {item && Object.keys(item).length > 0 && (
                     <div className="movie-card flex flex-col rounded-lg p-3 bg-slate-800 text-white h-full select-none">
                         <img
-                            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+                            src={`${tmdbAPI.imageBanner500(item.poster_path)}`}
                             alt=""
                         className="w-full h-[250px] object-cover rounded-lg mb-5"
                         />
@@ -20,9 +21,6 @@ const MovieCard = ({ item } ) => {
                                 <span>{item.vote_average.toFixed(1)}</span>
                             </div>
                             <Button onClick={() => navigate(`/movie/${item.id}`)} ></Button>
-                            {/* <button onClick={() => navigate(`/movie/${item.id}`)} className="bg-primary px-2 py-4 rounded-lg font-bold">
-                                Watch now
-                            </button> */}
                         </div>
                     </div>
                 )}
