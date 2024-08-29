@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../button/Button";
 
 const MovieCard = ({ item } ) => {
     const navigate = useNavigate()
@@ -18,9 +19,10 @@ const MovieCard = ({ item } ) => {
                                 <span>{new Date(item.release_date).getFullYear()}</span>
                                 <span>{item.vote_average.toFixed(1)}</span>
                             </div>
-                            <button onClick={() => navigate(`/movie/${item.id}`)} className="bg-primary px-2 py-4 rounded-lg font-bold">
+                            <Button onClick={() => navigate(`/movie/${item.id}`)} ></Button>
+                            {/* <button onClick={() => navigate(`/movie/${item.id}`)} className="bg-primary px-2 py-4 rounded-lg font-bold">
                                 Watch now
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 )}

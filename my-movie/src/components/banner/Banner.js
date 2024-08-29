@@ -2,6 +2,8 @@ import React from "react";
 import useSWR from "swr";
 import {fetcher} from "../../config/config";
 import {SwiperSlide, Swiper} from "swiper/react";
+import Button from "../button/Button";
+import { useNavigate } from "react-router";
 
 
 const Banner = () => {
@@ -24,7 +26,8 @@ const Banner = () => {
 };
 
 function BannerItem({ item }) {
-    const {title, poster_path, release_date, vote_average, overview} = item;
+    const {title, poster_path, overview, id} = item;
+    const navigate = useNavigate();
     return(
         <div className="w-full h-full rounded-lg bg-white relative">
             <div className="overlay absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
@@ -38,7 +41,8 @@ function BannerItem({ item }) {
                     <div className="text-[#ccc] w-[700px] mb-4 font-semibold text-lg">
                         <p>{overview}</p>
                     </div>
-                <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium mb-4">Watch Now</button>
+                <Button className="mb-4" onClick={() => navigate(`/movie/${id}`)}></Button>
+                {/* <button className="py-3 px-6 rounded-lg bg-primary text-white font-medium mb-4">Watch Now</button> */}
             </div>
         </div>
     )

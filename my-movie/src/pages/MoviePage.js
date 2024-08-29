@@ -31,14 +31,14 @@ const MoviePage = () => {
     useEffect(() => {
         if(!data || !data.total_results) return;
         setPageCount(Math.ceil(data.total_results / itemsPerPage))
-    }, [data])
+    }, [data, itemOffset])
   
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
-        console.log(event)
-      const newOffset = (event.selected * itemsPerPage) % data.total_results;
-      setItemOffset(newOffset);
-      setNextPage(event.selected + 1)
+        event.selected = event.selected + 1;
+        const newOffset = (event.selected * itemsPerPage) % data.total_results;
+        setItemOffset(newOffset);
+        setNextPage(event.selected);
     };
     return(
         <div className="py-10 page-container">
