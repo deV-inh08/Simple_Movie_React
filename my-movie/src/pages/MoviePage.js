@@ -11,7 +11,7 @@ const MoviePage = () => {
     const handleFilterChange = (e) => {
         setFilter(e.target.value)
     };
-    const { data } = useSWR(url, fetcher);
+    const { data, error, isLoading } = useSWR(url, fetcher);
     useEffect(() => {
         if(filterDebounce) {
             setUrl(`https://api.themoviedb.org/3/search/movie?api_key=939b4d71a1347aced70fc77fe9800e68&query=${filterDebounce}`)
@@ -37,13 +37,16 @@ const MoviePage = () => {
                     </svg>
                 </button>
             </div>
-            <div className="grid grid-cols-4 gap-10">
-                {movies.length > 0 && movies.map((item) => {
-                    return(
-                        <MovieCard key={item.id} item={item}></MovieCard>
-                    )
-                })}
-            </div>
+            {!data && isLoading && <div className="w-10 h-10 rounded-full border-4 border-primary border-t-transparent border-t-4 animate-spin mx-auto"></div>}
+            {data && !isLoading && 
+                    <div className="grid grid-cols-4 gap-10">
+                        {movies.length > 0 && movies.map((item) => {
+                            return(
+                                <MovieCard key={item.id} item={item}></MovieCard>
+                            )
+                        })}
+                    </div>
+            }
         </div>
     )
 };

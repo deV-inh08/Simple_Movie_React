@@ -6,10 +6,9 @@ import { fetcher, API_KEY} from "../config/config";
 import {SwiperSlide, Swiper} from "swiper/react";
 import MovieCard from "../components/movie/MovieCard";
 
-
 const MovieDetailsPage = () => {
     const { movieId } = useParams();
-    const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`, fetcher);
+    const { data, err} = useSWR(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`, fetcher);
     return(
         <Fragment>
             {data && 
@@ -48,6 +47,7 @@ const MovieDetailsPage = () => {
     )
 };
 
+// Movie Credits
 function MovieCredits() {
     const { movieId } = useParams();
     const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`, fetcher);
@@ -74,6 +74,7 @@ function MovieCredits() {
     )
 };
 
+// Movie Video
 function MovieVideo() {
     const { movieId } = useParams();
     const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${API_KEY}`, fetcher);
@@ -84,7 +85,8 @@ function MovieVideo() {
         <div className="py-10">
             {results.slice(0, 2).map((item) => {
                 return(
-                    <div className="w-full aspect-video" key={item.id}>
+                    <div className="w-full aspect-video mb-20" key={item.id}>
+                        <p className="text-white font-bold text-2xl">{item.name}</p>
                         <iframe 
                             width="948" height="590" src={`https://www.youtube.com/embed/${item.key}`}
                             title={`${item.name}`}
@@ -101,6 +103,7 @@ function MovieVideo() {
     )
 }
 
+// Movie Similar
 function MovieSimilar() {
     const { movieId } = useParams();
     const { data, err } = useSWR(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${API_KEY}`, fetcher);
@@ -124,7 +127,5 @@ function MovieSimilar() {
         </div>
     )
 }
-
-
 
 export default MovieDetailsPage;
