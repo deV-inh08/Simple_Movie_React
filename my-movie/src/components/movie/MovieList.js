@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import MovieCard from "./MovieCard";
+import MovieCard, { MovieCardSkeleton } from "./MovieCard";
 import {SwiperSlide, Swiper} from "swiper/react";
 import useSWR from "swr";
 import {fetcher, tmdbAPI} from "../../config/config"
+import LoadingSkeleton from "../loading/LoadingSkeleton";
 
 
 const MovieList = ({ type = "now_playing" }) => {
@@ -14,8 +15,19 @@ const MovieList = ({ type = "now_playing" }) => {
         setMovies(data.results)
        }
     }, [data])
-    return(
+    return (
         <div className="movie-list">
+            {isLoading && !data && 
+                <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={'auto'}>
+                        {movies.length > 0 && movies.map((item) => {
+                            return(
+                                <SwiperSlide>
+                                    <MovieCardSkeleton></MovieCardSkeleton>
+                                </SwiperSlide>
+                            )
+                        })}
+                </Swiper>
+            }
             <Swiper grabCursor={"true"} spaceBetween={40} slidesPerView={'auto'}>
                 {movies.length > 0 && movies.map((item) => {
                     return (
